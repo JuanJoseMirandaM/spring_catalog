@@ -1,6 +1,6 @@
 package bo.juanjose.catalog.repository;
 
-import bo.juanjose.catalog.entity.Category;
+import bo.juanjose.catalog.entity.Brand;
 import bo.juanjose.catalog.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     public Page<Product> findAll(Pageable pageable);
 
-    public List<Product> findByCategory(Category category);
+    public List<Product> findAllByBrand(Brand brand);
 }

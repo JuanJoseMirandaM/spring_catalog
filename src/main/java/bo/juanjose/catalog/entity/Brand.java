@@ -10,19 +10,19 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "t_categories")
+@Table(name = "t_brands")
 @Data
 @AllArgsConstructor @NoArgsConstructor @Builder
-public class Category {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String status;
 
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
+    private Date createdAt;
 
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)

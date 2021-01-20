@@ -22,7 +22,7 @@ public class Product {
     private String description;
     private Double stock;
     private Double price;
-    private String brand;
+
     private String status;
 
     @Column(name = "created_at")
@@ -39,7 +39,7 @@ public class Product {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "brand_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private Category category;
+    private Brand brand;
 }

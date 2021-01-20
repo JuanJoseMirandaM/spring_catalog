@@ -22,9 +22,9 @@ public class User {
     private String password;
     private String status;
 
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
+    private Date createdAt;
 
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
