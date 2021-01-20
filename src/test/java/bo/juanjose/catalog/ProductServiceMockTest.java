@@ -14,7 +14,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
 import java.util.Optional;
 
 @SpringBootTest
@@ -29,7 +28,7 @@ public class ProductServiceMockTest {
         MockitoAnnotations.initMocks(this);
         productService = new ProductServiceImpl(productRepository);
         Product computer = Product.builder()
-                .id(1)
+                .id(1L)
                 .name("computer")
                 .brand(Brand.builder().id(3L).build())
                 .stock(Double.parseDouble("10"))
@@ -37,7 +36,7 @@ public class ProductServiceMockTest {
                 .status("CREATED")
                 .user(User.builder().id(1L).build()).build();
 
-        Mockito.when(productRepository.findById(1))
+        Mockito.when(productRepository.findById(1L))
                 .thenReturn(Optional.of(computer));
         Mockito.when(productRepository.save(computer))
                 .thenReturn(computer);
@@ -45,19 +44,19 @@ public class ProductServiceMockTest {
 
     @Test
     public void whenValidGetID_ThenReturnProduct(){
-        Product found = productService.getProduct(1).orElse(null);
+        Product found = productService.getProduct(1L).orElse(null);
         Assertions.assertThat(found.getName()).isEqualTo("computer");
     }
 
     @Test
     public void whenValidUpdateStock_thenReturnNewStock(){
-        Product newStock = productService.updateStock(1, Double.parseDouble("8")).orElse(null);
+        Product newStock = productService.updateStock(1L, Double.parseDouble("8")).orElse(null);
         Assertions.assertThat(newStock.getStock()).isEqualTo(18);
     }
 
     @Test
     public void whenValidDeleted_thenReturnDeleted(){
-        Product deleted = productService.deleteProduct(1).orElse(null);
+        Product deleted = productService.deleteProduct(1L).orElse(null);
         Assertions.assertThat(deleted.getStatus()).isEqualTo("DELETED");
     }
 }

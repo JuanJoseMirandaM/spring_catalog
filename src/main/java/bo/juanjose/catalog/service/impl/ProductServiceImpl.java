@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> getProduct(Integer id) {
+    public Optional<Product> getProduct(Long id) {
         return productRepository.findById(id);
     }
 
@@ -64,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> deleteProduct(Integer id) {
+    public Optional<Product> deleteProduct(Long id) {
         Optional<Product> productDeleted = getProduct(id);
         return productDeleted.map(product -> {
             product.setStatus("DELETED");
@@ -76,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> updateStock(Integer id, Double quantity) {
+    public Optional<Product> updateStock(Long id, Double quantity) {
         Optional<Product> productDB = getProduct(id);
         return productDB.map(product -> {
            product.setStock(product.getStock()+quantity);

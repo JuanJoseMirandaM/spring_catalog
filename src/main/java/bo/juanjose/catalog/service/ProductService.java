@@ -11,10 +11,10 @@ import java.util.Optional;
 public interface ProductService {
     public Page<Product> listAllProduct(Pageable pageable);
     public List<Product> findByBrand(Brand brand);
-    public Optional<Product> getProduct(Integer id);
+    public Optional<Product> getProduct(Long id);
     public Product createProduct(Product product);
     public Optional<Product> updateProduct(Product product);
-    public Optional<Product> deleteProduct(Integer id);
+    public Optional<Product> deleteProduct(Long id);
 
-    public Optional<Product> updateStock(Integer id, Double quantity);
+    public Optional<Product> updateStock(Long id, Double quantity);
 }
