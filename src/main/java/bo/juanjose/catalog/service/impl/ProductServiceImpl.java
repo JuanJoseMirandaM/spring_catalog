@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
+        product.setVisits(0);
         product.setCreatedAt(new Date());
         product.setUpdatedAt(new Date());
         product.setStatus("CREATED");
@@ -83,6 +84,16 @@ public class ProductServiceImpl implements ProductService {
            product.setUpdatedAt(new Date());
            product.setUser(User.builder().id(1L).build());
 
+           return productRepository.save(product);
+        });
+    }
+
+    @Override
+    public Optional<Product> updateVisits(Long id) {
+        Optional<Product> productDB = getProduct(id);
+
+        return productDB.map(product -> {
+            product.setVisits(product.getVisits()+1);
            return productRepository.save(product);
         });
     }

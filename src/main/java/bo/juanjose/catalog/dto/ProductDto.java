@@ -29,4 +29,6 @@ public class ProductDto {
 
     @NotNull(message = "La marca no puede ser nula")
     private BrandDto brand;
+
+    private int visits;
 }

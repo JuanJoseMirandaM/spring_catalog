@@ -17,4 +17,6 @@ public interface ProductService {
     public Optional<Product> deleteProduct(Long id);
 
     public Optional<Product> updateStock(Long id, Double quantity);
+
+    public Optional<Product> updateVisits(Long id);
 }

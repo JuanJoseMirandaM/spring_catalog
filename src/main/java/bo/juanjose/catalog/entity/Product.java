@@ -42,4 +42,6 @@ public class Product {
     @JoinColumn(name = "brand_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Brand brand;
+
+    private int visits;
 }

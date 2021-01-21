@@ -31,14 +31,14 @@ public class ProductController {
 
     public final ModelMapper modelMapper = new ModelMapper();
 
-    @GetMapping
+    @GetMapping("/anonymous")
     public ResponseEntity<PageImpl<ProductDto>> listProduct(Pageable pageable){
         Page<Product> products = productService.listAllProduct(pageable);
         Page<ProductDto> productsDto = products.map(this::convertToDto);
         return ResponseEntity.ok(new PageImpl<>(productsDto));
     }
 
-    @GetMapping("/listBrand")
+    @GetMapping("/anonymous/listBrand")
     public ResponseEntity<List<ProductDto>> listProduct(@RequestParam(name = "brandId", required = false) Long brandId){
         List<Product> products = productService.findByBrand(Brand.builder().id(brandId).build());
         List<ProductDto> productsDto = products.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -48,6 +48,13 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getProduct(@PathVariable("id") Long id){
         return productService.getProduct(id)
+                .map(product -> ResponseEntity.ok(convertToDto(product)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/anonymous/{id}")
+    public ResponseEntity<ProductDto> getProductAnonymous(@PathVariable("id") Long id){
+        return productService.updateVisits(id)
                 .map(product -> ResponseEntity.ok(convertToDto(product)))
                 .orElse(ResponseEntity.notFound().build());
     }
