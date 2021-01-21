@@ -4,6 +4,7 @@ package bo.juanjose.catalog.controller;
 import bo.juanjose.catalog.dto.AuthenticationRequest;
 import bo.juanjose.catalog.dto.AuthenticationResponse;
 import bo.juanjose.catalog.security.jwt.JWTUtil;
+import bo.juanjose.catalog.security.service.MyUserDetailsImpl;
 import bo.juanjose.catalog.security.service.MyUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,13 +29,14 @@ public class AuthController {
     private JWTUtil jwtUtil;
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthenticationResponse> createToken(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<?> createToken(@RequestBody AuthenticationRequest request){
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-            UserDetails userDetails = myUserDetailsServiceImpl.loadUserByUsername(request.getEmail());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            MyUserDetailsImpl userDetails = myUserDetailsServiceImpl.loadUserByUsername(request.getUsername());
             String jwt = jwtUtil.generateToken(userDetails);
-            return new ResponseEntity<>(new AuthenticationResponse(userDetails.getUsername(), jwt), HttpStatus.OK);
+            return new ResponseEntity<>(new AuthenticationResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), jwt), HttpStatus.OK);
         }catch (BadCredentialsException e){
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }

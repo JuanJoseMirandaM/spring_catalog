@@ -17,6 +17,9 @@ public class UserDto {
     @NotEmpty(message = "El nombre no debe ser vacio")
     private String name;
 
+    @NotEmpty(message = "El username no debe ser vacio")
+    private String username;
+
     @NotEmpty(message = "El email no debe ser vacio")
     @Size(max = 50, message = "El email es demasiado largo")
     @Email(message = "Debe ser un email valido")

@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userDB = getUser(user.getId());
         return userDB.map(userdb -> {
             userdb.setName(user.getName());
+            userdb.setUsername(user.getUsername());
             userdb.setEmail(user.getEmail());
             userdb.setPassword(user.getPassword());
 

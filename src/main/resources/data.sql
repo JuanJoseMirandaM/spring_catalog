@@ -1,5 +1,5 @@
-INSERT INTO t_users (id, name, email, password, status, created_at, updated_at, user_id) VALUES
-(1, 'Juan Jose Miranda', 'juanjose@spring.com', '12345', 'CREATED', '2020-01-20', '2020-01-20', 1);
+INSERT INTO t_users (id, name, username, email, password, status, created_at, updated_at, user_id) VALUES
+(1, 'Juan Jose Miranda', 'jjsmm', 'juanjose@spring.com', '12345', 'CREATED', '2020-01-20', '2020-01-20', 1);
 
 INSERT INTO t_brands (id, name, status, created_at, updated_at, user_id)  VALUES
 (1, 'apple', 'CREATED','2020-01-20', '2020-01-20', 1),
